@@ -65,6 +65,16 @@ php_version                 = '7.4'
 # optional php packages see: roles/php/var/main.yml
 php_install_optional_packages = true
 
+# Use S3 Bucket as primary storage
+objectstore_s3_key            = ''
+objectstore_s3_secret         = ''
+# objectstore_s3_bucket_name    = ''
+# objectstore_s3_hostname       = 's3.amazonaws.com'
+# objectstore_s3_port           = '443'
+# objectstore_s3_use_ssl        = 'true'
+# objectstore_s3_region         = 'us-east-1'
+# objectstore_s3_use_path_style = 'true'
+
 # Install turn server for Nextcloud Talk
 # currently broken for https://help.nextcloud.com/t/cannot-install-talk-on-fresh-nextcloud-18-install/68613
 talk_install         = false
