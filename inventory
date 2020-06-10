@@ -139,3 +139,6 @@ localhost ansible_connection=local
 
 [onlyoffice]
 localhost ansible_connection=local
+
+[coturn]
+localhost ansible_connection=local
