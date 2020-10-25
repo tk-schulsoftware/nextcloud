@@ -1,54 +1,29 @@
 #cloud-config
-
-#
-# Bootstrap Nextcloud
-# 
-# Edit ssh-authorized-keys: and runcmd: according to your needs
-# Insert this as cloud-config/user data at launch of your ec2, droplet, openstack server, etc. pp.
-# Login to your full configured NextCloud/Talk/Collabora-Server
-
-#
-# Create default system user (see below system_info: )
-#
 users:
   - default
-#
-# Install the minimal set of programs to bootstrap ansible and nextcloud
-#
 packages:
     - vim
     - mc
     - wget
     - curl
-#
-# Update server already at launch time
-#
+    - bash-completion
+
 package_upgrade: true
-#
-# Create default system user
-# Edit the name and ssh-authorized-keys according to your needs
-#
+
 system_info:
   default_user:
-    name: ec2-user
+    name: ops
     uid: 1000
-    gecos: "cloud-init created default user"
+    gecos: "operations user"
     lock_passwd: True
     sudo: ["ALL=(ALL) NOPASSWD:ALL"]
-    home: /home/ec2-user
+    home: /home/ops
     shell: /bin/bash
     ssh-authorized-keys:
-      - 'ssh-rsa <your ssh pub key here>'
-#
-# Install and configure NextCloud in three steps
-# Put any changes to the settings in the ansible inventory file as extra variables to ansible-pull
-# e.g.: ansible-pull ... -e "next_archive=https://download.nextcloud.com/server/prereleases/nextcloud-13.0.5RC2.tar.bz2" -e "nc_passwd=your_secret"
-#
+      - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDOR8Ry5QySCmQk3EUoAwbhxsU1KQQeZ28UrSc80qJ8DSx2qEHXsvq0GsQNwwKYMe9/HXInYCqI3hiaUViA1WkwWcExYMctTpjeAntH5aZVIOsT952pRtGH4U/bTj3k/VH+GBxN6v6PCEVccn62wojTbxo8ul3ERljOiKUIBIRUBnjlIs2cMMlj3d0lf83c9TByKQpQ/ig6HPlUiw2n/LEa+CqNV7WjCDl19BY2VGtmDX4/5MKf6k9iwfqc4S4Iq0uugAbjLoX8JVv8ICtmgEJcl/F7E5yqMOPYkx/uL3DkSAsmD5EV+xwZS6l+BRj4vnVFca82mJp280OnErrMJQoE7qhBvuEdvvt+FnjwNBGlPntu8hRCHZYqdW9a/ttv1OhE81KDwe7KvoL0A3hioeDlC08eOv8E+xXApsKn7W1pyL95yJKPOyZffGbSVRITu2ZO/ovVpVXskGYz0+XttHzUVt9Gs9fR28yzO3HzAzCRDlK4FvuR4Fcdc/OTDpF8ZUhR7QpuZfAJ6nJx+T93oRxaoog28QZc6IhW62/jDN1AlMGWou22RKnILBnERCDtRYpFn9fGh+r/1h38f83N9YRHbkomPR/4l7yfdvhVm8e0D1n2EFFgH4gTJ+GXI07yC+/RTlXHI9tWzkGhAwTmS+NYZmpUhhwrCZq9Q0ZgOpJCWQ=='
+
 runcmd:
-  - curl -s https://raw.githubusercontent.com/ReinerNippes/nextcloud/master/prepare_system.sh | /bin/bash
-  - # 
-  - # Insert a command to set a DynDNS record for this server here
-  - # e.g. Strato DynDNS
-  - # curl --silent --show-error --insecure --user [BENUTZERNAME]:[PASSWORT] https://dyndns.strato.com/nic/update?hostname=[HOSTNAME]
-  - HOME=/root ansible-pull --clean --force -d /root/nextcloud -i 'localhost,' -U https://github.com/ReinerNippes/nextcloud.git nextcloud.yml -e "nextcloud_fqdn=nextcloud.example.tld"
+  - curl -s https://raw.githubusercontent.com/tk-schulsoftware/nextcloud/nextcloud-reloaded/prepare_system.sh | /bin/bash
+  - HOME=/root git clone --branch nextcloud-reloaded https://github.com/tk-schulsoftware/nextcloud
+  - HOME=/root ansible-pull --clean --force -d /root/nextcloud -i 'localhost,' -U https://github.com/tk-schulsoftware/nextcloud.git nextcloud.yml -e "nextcloud_fqdn=tks.cloud.plattform.schule"
 
