@@ -24,6 +24,5 @@ system_info:
 
 runcmd:
   - curl -s https://raw.githubusercontent.com/tk-schulsoftware/nextcloud/nextcloud-reloaded/prepare_system.sh | /bin/bash
-  - HOME=/root git clone --branch nextcloud-reloaded https://github.com/tk-schulsoftware/nextcloud
   - HOME=/root ansible-pull --clean --force -d /root/nextcloud -i 'localhost,' -U https://github.com/tk-schulsoftware/nextcloud.git nextcloud.yml -e "nextcloud_fqdn=tks.cloud.plattform.schule"
 
