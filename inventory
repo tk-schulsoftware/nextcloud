@@ -29,7 +29,7 @@ nextcloud_data_dir          = /var/nc-data
 
 # Nextcloud Admin User
 # Leave Password Empty to generate secure, random one
-nextcloud_admin             = 'admin'
+nextcloud_admin             = 'admin@plattform.org'
 nextcloud_passwd            = ''
 
 # Nextcloud Database Settings
