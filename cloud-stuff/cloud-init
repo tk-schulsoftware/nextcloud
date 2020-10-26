@@ -23,6 +23,6 @@ system_info:
       - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDOR8Ry5QySCmQk3EUoAwbhxsU1KQQeZ28UrSc80qJ8DSx2qEHXsvq0GsQNwwKYMe9/HXInYCqI3hiaUViA1WkwWcExYMctTpjeAntH5aZVIOsT952pRtGH4U/bTj3k/VH+GBxN6v6PCEVccn62wojTbxo8ul3ERljOiKUIBIRUBnjlIs2cMMlj3d0lf83c9TByKQpQ/ig6HPlUiw2n/LEa+CqNV7WjCDl19BY2VGtmDX4/5MKf6k9iwfqc4S4Iq0uugAbjLoX8JVv8ICtmgEJcl/F7E5yqMOPYkx/uL3DkSAsmD5EV+xwZS6l+BRj4vnVFca82mJp280OnErrMJQoE7qhBvuEdvvt+FnjwNBGlPntu8hRCHZYqdW9a/ttv1OhE81KDwe7KvoL0A3hioeDlC08eOv8E+xXApsKn7W1pyL95yJKPOyZffGbSVRITu2ZO/ovVpVXskGYz0+XttHzUVt9Gs9fR28yzO3HzAzCRDlK4FvuR4Fcdc/OTDpF8ZUhR7QpuZfAJ6nJx+T93oRxaoog28QZc6IhW62/jDN1AlMGWou22RKnILBnERCDtRYpFn9fGh+r/1h38f83N9YRHbkomPR/4l7yfdvhVm8e0D1n2EFFgH4gTJ+GXI07yC+/RTlXHI9tWzkGhAwTmS+NYZmpUhhwrCZq9Q0ZgOpJCWQ=='
 
 runcmd:
-  - curl -s https://raw.githubusercontent.com/tk-schulsoftware/nextcloud/prepare_system.sh | /bin/bash
+  - curl -s https://raw.githubusercontent.com/tk-schulsoftware/nextcloud/master/prepare_system.sh | /bin/bash
   - HOME=/root ansible-pull --clean --force -d /root/nextcloud -i 'localhost,' -U https://github.com/tk-schulsoftware/nextcloud.git nextcloud.yml -e "nextcloud_fqdn=tks.cloud.plattform.schule"
 
