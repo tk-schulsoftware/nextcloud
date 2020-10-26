@@ -30,6 +30,6 @@
     path: /srv/daten/nextcloud
     src: '{{ nextcloud_data_volume }}'
     fstype: ext4
-    opts: ro,noauto
+    opts: errors=remount-ro
     state: present
   when: nextcloud_data_volume != ''
