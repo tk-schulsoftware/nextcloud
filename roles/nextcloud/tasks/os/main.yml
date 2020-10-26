@@ -28,8 +28,8 @@
 - name: mount data volume
   ansible.posix.mount:
     path: /srv/daten/nextcloud
-    src: '{{ nextcloud_data_volumes }}'
+    src: '{{ nextcloud_data_volume }}'
     fstype: ext4
     opts: ro,noauto
     state: present
-  when: nextcloud_data_volumes != ''
+  when: nextcloud_data_volume != ''
