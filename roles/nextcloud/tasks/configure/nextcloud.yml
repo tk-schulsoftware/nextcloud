@@ -16,7 +16,7 @@
     mode:  '0640'
     backup: true
     force:  false
-  when: 
+  when:
     - ( objectstore_s3_key != '' )
     - ( objectstore_s3_secret != '' )
     - ( not config_php.stat.exists )
@@ -31,14 +31,14 @@
   become_flags: "{{ ansible_become_flags | default(omit) }}"
   become: yes
   shell: >
-    php occ  maintenance:install 
-    --database {{ nextcloud_db_type }} 
-    --database-host "{{ nextcloud_db_host }}" 
-    --database-name {{ nextcloud_db }} 
-    --database-user {{ nextcloud_db_user }} 
-    --database-pass {{ lookup('password', '{{ credential_store }}/database_secret chars=ascii_letters,digits length=32') }} 
-    --admin-user {{ nextcloud_admin }} 
-    --admin-pass {{ nextcloud_passwd }} 
+    php occ  maintenance:install
+    --database {{ nextcloud_db_type }}
+    --database-host "{{ nextcloud_db_host }}"
+    --database-name {{ nextcloud_db }}
+    --database-user {{ nextcloud_db_user }}
+    --database-pass {{ lookup('password', '{{ credential_store }}/database_secret chars=ascii_letters,digits length=32') }}
+    --admin-user {{ nextcloud_admin }}
+    --admin-pass {{ nextcloud_passwd }}
     --data-dir {{ nextcloud_data_dir }}
   args:
     chdir: "{{ nextcloud_www_dir }}"
@@ -93,4 +93,4 @@
     chdir: "{{ nextcloud_www_dir }}"
   loop: "{{ nextcloud_app_config }}"
   when: ( first_setup_nextcloud is changed ) or ( force_nextcloud_config|default(false) )
-  
+

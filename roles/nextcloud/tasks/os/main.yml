@@ -24,3 +24,12 @@
     - PDF
     - XPS
   when: imagemagick_xml_path[ansible_distribution] != ''
+
+- name: mount data volume
+  ansible.posix.mount:
+    path: /srv/daten/nextcloud
+    src: '{{ nextcloud_data_volumes }}'
+    fstype: ext4
+    opts: ro,noauto
+    state: present
+  when: nextcloud_data_volumes != ''
