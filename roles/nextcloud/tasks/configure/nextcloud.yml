@@ -9,13 +9,13 @@
 
 - name: define S3 as primary storage (only if config.php doesn't exist)
   template:
-    src:   'objectstore_s3_config.php.j2'
-    dest:  '{{ nextcloud_www_dir }}/config/config.php'
+    src: 'objectstore_s3_config.php.j2'
+    dest: '{{ nextcloud_www_dir }}/config/config.php'
     owner: '{{ web_user[nextcloud_webserver_type][ansible_os_family] }}'
     group: '{{ web_group[nextcloud_webserver_type][ansible_os_family] }}'
-    mode:  '0640'
+    mode: '0640'
     backup: true
-    force:  false
+    force: false
   when:
     - ( objectstore_s3_key != '' )
     - ( objectstore_s3_secret != '' )
@@ -46,6 +46,19 @@
   register: first_setup_nextcloud
 
 - debug: var=first_setup_nextcloud verbosity=2
+
+- name: collect nextcloud instanceid
+  become_user: "{{ web_user[nextcloud_webserver_type][ansible_os_family] }}"
+  become_flags: "{{ ansible_become_flags | default(omit) }}"
+  become: yes
+  shell: >
+    php occ config:system:get instanceid
+  args:
+    chdir: "{{ nextcloud_www_dir }}"
+  when: ( not config_php.stat.exists )
+  register: nextcloud_instanceid
+
+- debug: var=nextcloud_instanceid verbosity=2
 
 - name: set nextcloud domain config.php values
   become_user: "{{ web_user[nextcloud_webserver_type][ansible_os_family] }}"
@@ -94,3 +107,18 @@
   loop: "{{ nextcloud_app_config }}"
   when: ( first_setup_nextcloud is changed ) or ( force_nextcloud_config|default(false) )
 
+- name: install bildungsplattform logos (external)
+  copy:
+    src: ../../files/external/
+    dest: "{{ nextcloud_data_dir }}/appdata_{{ nextcloud_instanceid }}/external/icons/"
+    owner: '{{ web_user[nextcloud_webserver_type][ansible_os_family] }}'
+    group: '{{ web_group[nextcloud_webserver_type][ansible_os_family] }}'
+    mode: '0644'
+
+- name: install bildungsplattform logos (theming)
+  copy:
+    src: ../../files/theming/
+    dest: "{{ nextcloud_data_dir }}/appdata_{{ nextcloud_instanceid }}/theming/images/"
+    owner: '{{ web_user[nextcloud_webserver_type][ansible_os_family] }}'
+    group: '{{ web_group[nextcloud_webserver_type][ansible_os_family] }}'
+    mode: '0644'
