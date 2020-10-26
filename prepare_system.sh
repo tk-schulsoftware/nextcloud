@@ -106,6 +106,13 @@ prepare_amzn() {
         ansible --version
 }
 
+preprare_repo() {
+        $SUDO su
+        mkdir -p /root/ansible-nextcloud
+        cd /root
+        git clone https://github.com/tk-schulsoftware/nextcloud ansible-nextcloud
+}
+
 usage() {
         echo
         echo "Linux distribution not detected."
@@ -130,9 +137,11 @@ fi
 case $ID in
         'ubuntu')
                 prepare_ubuntu
+                preprare_repo
         ;;
         'debian')
                 prepare_debian
+                preprare_repo
         ;;
         'raspbian')
                 prepare_raspbian
