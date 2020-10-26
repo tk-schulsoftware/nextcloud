@@ -108,7 +108,7 @@
 
 - name: install bildungsplattform logos (external)
   copy:
-    src: ../../files/external/
+    src: external/
     dest: "{{ nextcloud_data_dir }}/appdata_{{ nextcloud_instanceid }}/external/icons/"
     owner: '{{ web_user[nextcloud_webserver_type][ansible_os_family] }}'
     group: '{{ web_group[nextcloud_webserver_type][ansible_os_family] }}'
@@ -116,7 +116,7 @@
 
 - name: install bildungsplattform logos (theming)
   copy:
-    src: ../../files/theming/
+    src: theming/
     dest: "{{ nextcloud_data_dir }}/appdata_{{ nextcloud_instanceid }}/theming/images/"
     owner: '{{ web_user[nextcloud_webserver_type][ansible_os_family] }}'
     group: '{{ web_group[nextcloud_webserver_type][ansible_os_family] }}'
