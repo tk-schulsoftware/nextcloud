@@ -85,5 +85,7 @@ nextcloud_app_config:
     state: enable
   - name: sociallogin
     state: enable
+  - name: impersonate
+    state: enable
 #  - name:  extract
 #    state: enable
