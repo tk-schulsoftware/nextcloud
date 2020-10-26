@@ -58,6 +58,7 @@ nextcloud_config:
   - "blacklisted_files 0 --value='.htaccess'"
   - "blacklisted_files 1 --value='Thumbs.db'"
   - "blacklisted_files 2 --value='thumbs.db'"
+  - "social_login_auto_redirect --value=true --type=boolean"
 
 nextcloud_mail_config:
   - "mail_from_address --value={{ nextcloud_mail_from }}"
