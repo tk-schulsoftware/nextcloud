@@ -55,7 +55,6 @@
     php occ config:system:get instanceid
   args:
     chdir: "{{ nextcloud_www_dir }}"
-  when: ( not config_php.stat.exists )
   register: nextcloud_instanceid
 
 - debug: var=nextcloud_instanceid verbosity=2

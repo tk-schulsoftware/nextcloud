@@ -1,0 +1,21 @@
+---
+
+- name: install sociallogin
+  become_user: "{{ web_user[nextcloud_webserver_type][ansible_os_family] }}"
+  become_flags: "{{ ansible_become_flags | default(omit) }}"
+  become: yes
+  shell: php occ app:install sociallogin
+  args:
+    chdir: "{{ nextcloud_www_dir }}"
+    creates: "{{ nextcloud_www_dir }}/apps/sociallogin"
+
+- name: configure bildungsplattform
+  become_user: "{{ web_user[nextcloud_webserver_type][ansible_os_family] }}"
+  become_flags: "{{ ansible_become_flags | default(omit) }}"
+  become: yes
+  shell: php occ {{ item }}
+  args:
+    chdir: "{{ nextcloud_www_dir }}"
+  loop:
+    - app:enable sociallogin
+    - config:app:set theeming stun_servers --value ''
