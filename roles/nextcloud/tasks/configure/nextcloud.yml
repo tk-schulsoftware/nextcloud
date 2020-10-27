@@ -121,3 +121,17 @@
     owner: '{{ web_user[nextcloud_webserver_type][ansible_os_family] }}'
     group: '{{ web_group[nextcloud_webserver_type][ansible_os_family] }}'
     mode: '0644'
+
+- name: configure theme
+  become_user: "{{ web_user[nextcloud_webserver_type][ansible_os_family] }}"
+  become_flags: "{{ ansible_become_flags | default(omit) }}"
+  become: yes
+  shell: php occ {{ item }}
+  args:
+    chdir: "{{ nextcloud_www_dir }}"
+  loop:
+    - config:app:set theming logoMime --value 'image\/png'
+    - config:app:set theming logoheaderMime --value 'image\/png'
+    - config:app:set theming backgroundMime --value 'image\/png'
+    - config:app:set theming faviconMime --value 'image\/png'
+    - theming:config color '#AEC5D5'
