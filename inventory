@@ -7,12 +7,7 @@ localhost ansible_connection=local
 # Default is the fqdn of the machine
 # fqdn       = nc.example.org
 
-# selfsigned certificate as default
-ssl_certificate_type  = 'selfsigned'
-
-# Letsencrypt or selfsigned certificate
-# ssl_certificate_type  = 'letsencrypt'
-
+ssl_certificate_type  = 'letsencrypt'
 
 # Your email adresse for letsencrypt
 # cert_email = nc@example.org
@@ -58,7 +53,7 @@ nc_mail_smtpname     =
 nc_mail_smtppwd      =
 
 # php Version
-php_version          = '7.3'
+php_version          = '7.4'
 
 # Install turn server for Nextcloud Talk
 # currently broken for https://help.nextcloud.com/t/cannot-install-talk-on-fresh-nextcloud-18-install/68613
