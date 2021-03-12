@@ -1,7 +1,0 @@
----
-# handlers file for postgres
-
-- name: restart postgresql
-  service: 
-    name: "{{ postgresql_daemon[ansible_distribution] }}"
-    state: restarted

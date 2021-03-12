@@ -1,6 +1,20 @@
 #cloud-config
+
+#
+# Bootstrap Nextcloud
+#
+# Edit ssh-authorized-keys: and runcmd: according to your needs
+# Insert this as cloud-config/user data at launch of your ec2, droplet, openstack server, etc. pp.
+# Login to your full configured NextCloud/Talk/Collabora-Server
+
+#
+# Create default system user (see below system_info: )
+#
 users:
   - default
+#
+# Install the minimal set of programs to bootstrap ansible and nextcloud
+#
 packages:
     - vim
     - mc
@@ -8,8 +22,14 @@ packages:
     - curl
     - bash-completion
 
+#
+# Update server already at launch time
+#
 package_upgrade: true
-
+#
+# Create default system user
+# Edit the name and ssh-authorized-keys according to your needs
+#
 system_info:
   default_user:
     name: ops
