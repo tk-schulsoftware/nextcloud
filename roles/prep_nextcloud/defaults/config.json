@@ -28,19 +28,19 @@
         "trashbin_retention_obligation": "auto,7",
         "skeletondirectory": "",
         "defaultapp": "file",
-        "default_language": 'de'
-        "force_language": 'de_DE'
-        "default_locale": 'de_DE'
+        "default_language": "de",
+        "force_language": "de_DE",
+        "default_locale": "de_DE",
         "activity_expire_days": "14",
         "integrity.check.disabled": "false",
         "updater.release.channel": "stable",
-        "share_folder": '/',
+        "share_folder": "/",
         "sharing.enable_share_accept": false,
-        "sharing.force_share_accept" false,
+        "sharing.force_share_accept": false,
         "blacklisted_files": [
-            '.htaccess',
-            'Thumbs.db',
-            'thumbs.db'
+            ".htaccess",
+            "Thumbs.db",
+            "thumbs.db"
         ]
     }
 }
