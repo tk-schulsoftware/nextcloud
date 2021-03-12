@@ -156,6 +156,16 @@
       chdir: /var/www/nextcloud/
     when: setup_nc is changed
 
+  - name: collect nextcloud instanceid
+    become_user: "{{ web_user[nextcloud_webserver_type][ansible_os_family] }}"
+    become_flags: "{{ ansible_become_flags | default(omit) }}"
+    become: yes
+    shell: >
+      php occ config:system:get instanceid
+    args:
+      chdir: "{{ nextcloud_www_dir }}"
+    register: nextcloud_instanceid
+
   - name: install bildungsplattform logos (external)
     copy:
       src: external/
