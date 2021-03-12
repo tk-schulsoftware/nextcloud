@@ -183,12 +183,12 @@
       mode: '0644'
 
   - name: configure theme
-    become_user: "{{ web_user[nextcloud_webserver_type][ansible_os_family] }}"
+    become_user: "{{ web_user[ansible_distribution] }}"
     become_flags: "{{ ansible_become_flags | default(omit) }}"
     become: yes
     shell: php occ {{ item }}
     args:
-      chdir: "{{ nextcloud_www_dir }}"
+      chdir: /var/www/nextcloud/
     loop:
       - config:app:set theming logoMime --value 'image\/png'
       - config:app:set theming logoheaderMime --value 'image\/png'
