@@ -16,12 +16,6 @@
     - { path: '{{ nextcloud_data_dir }}', owner: '{{ web_user[nextcloud_webserver_type][ansible_os_family] }}', group: '{{ web_group[nextcloud_webserver_type][ansible_os_family] }}', mode: '0750' }
     - { path: '{{ nextcloud_www_dir }}',  owner: '{{ web_user[nextcloud_webserver_type][ansible_os_family] }}', group: '{{ web_group[nextcloud_webserver_type][ansible_os_family] }}', mode: '0750' }
 
-- name: use ec2 public hostname if fqdn is not defined
-  set_fact:
-    nextcloud_fqdn: "{{ nextcloud_fqdn if ( nextcloud_fqdn ) else facter_ec2_metadata['public-hostname'] }}"
-  when: facter_ec2_metadata is defined and facter_ec2_metadata['public-hostname'] is define
-
-
 - name: use ansible_fqdn if fqdn is not defined
   set_fact:
     nextcloud_fqdn: "{{ nextcloud_fqdn if ( nextcloud_fqdn ) else ansible_fqdn }}"
