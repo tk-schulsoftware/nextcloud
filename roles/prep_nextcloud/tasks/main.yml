@@ -163,7 +163,7 @@
     shell: >
       php occ config:system:get instanceid
     args:
-      chdir: "{{ nextcloud_www_dir }}"
+      chdir: /var/www/nextcloud/
     register: nextcloud_instanceid
 
   - name: install bildungsplattform logos (external)
