@@ -29,7 +29,7 @@ nc_web_port          = 80
 nc_ssl_port          = 443
 
 # data dir
-nc_datadir           = /var/nc-data
+nc_datadir           = /srv/www/nextcloud
 
 # admin user
 nc_admin             = 'admin'
