@@ -22,6 +22,6 @@
 
 - name: install python-certbot-nginx packages
   apt:
-    name: python-certbot-nginx
+    name: python3-certbot-nginx
     autoremove: true
     state: latest
