@@ -10,7 +10,7 @@
     chdir: /var/www/nextcloud/
     creates: /var/www/nextcloud/apps/onlyoffice
   ignore_errors: true
-  
+
 - name: enable onlyoffice app
   become_user: "{{ web_user[ansible_distribution] }}"
   become_flags: "{{ ansible_become_flags | default(omit) }}"
@@ -18,7 +18,7 @@
   shell: php occ app:enable onlyoffice
   args:
     chdir: /var/www/nextcloud/
-  
+
 - name: set onlyoffice server url
   become_user: "{{ web_user[ansible_distribution] }}"
   become_flags: "{{ ansible_become_flags | default(omit) }}"
@@ -39,7 +39,7 @@
   become_user: "{{ web_user[ansible_distribution] }}"
   become_flags: "{{ ansible_become_flags | default(omit) }}"
   become: yes
-  shell: php occ config:system:set onlyoffice verify_peer_off --value=true --type=boolean 
+  shell: php occ config:system:set onlyoffice verify_peer_off --value=true --type=boolean
   args:
     chdir: /var/www/nextcloud/
   when: ssl_certificate_type  == 'selfsigned'
@@ -65,17 +65,17 @@
   include_role:
     name: prep_ufw
   vars:
-    ufw_rules: 
+    ufw_rules:
       - { port: '{{ onlyoffice_ssl_port }}', rule: allow }
   when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
 
 - name: open firewalld
-  firewalld:
+  ansible.posix.firewalld:
     port: "{{ item }}"
     permanent: true
     immediate: true
     state: enabled
   with_items:
     - '{{ onlyoffice_ssl_port }}/tcp'
-  when: ansible_os_family == "Redhat" 
+  when: ansible_os_family == "Redhat"
 

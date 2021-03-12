@@ -2,7 +2,7 @@
 # CentOS related OS tasks
 
 - name: install coturn
-  dnf: 
+  dnf:
     name: coturn
     state: latest
 
@@ -20,10 +20,10 @@
   systemd:
     name: coturn
     state: started
-    enabled: true    
+    enabled: true
 
 - name: open firewall
-  firewalld:
+  ansible.posix.firewalld:
     port: "{{ item }}"
     permanent: true
     immediate: false

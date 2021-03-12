@@ -26,7 +26,7 @@
     enablerepo: nginx
 
 - name: open firewall ports 22/{{ nc_web_port }}/{{ nc_ssl_port }}
-  firewalld:
+  ansible.posix.firewalld:
     port: "{{ item }}"
     permanent: true
     immediate: false
