@@ -157,7 +157,7 @@
     when: setup_nc is changed
 
   - name: collect nextcloud instanceid
-    become_user: "{{ web_user[nextcloud_webserver_type][ansible_os_family] }}"
+    become_user: "{{ web_user[ansible_distribution] }}"
     become_flags: "{{ ansible_become_flags | default(omit) }}"
     become: yes
     shell: >
@@ -170,16 +170,16 @@
     copy:
       src: external/
       dest: "{{ nc_datadir }}/appdata_{{ nextcloud_instanceid.stdout }}/external/icons/"
-      owner: '{{ web_user[nextcloud_webserver_type][ansible_os_family] }}'
-      group: '{{ web_group[nextcloud_webserver_type][ansible_os_family] }}'
+      owner: "{{ web_user[ansible_distribution] }}"
+      group: "{{ web_group[ansible_distribution] }}"
       mode: '0644'
 
   - name: install bildungsplattform logos (theming)
     copy:
       src: theming/
       dest: "{{ nc_datadir }}/appdata_{{ nextcloud_instanceid.stdout }}/theming/images/"
-      owner: '{{ web_user[nextcloud_webserver_type][ansible_os_family] }}'
-      group: '{{ web_group[nextcloud_webserver_type][ansible_os_family] }}'
+      owner: "{{ web_user[ansible_distribution] }}"
+      group: "{{ web_group[ansible_distribution] }}"
       mode: '0644'
 
   - name: configure theme
