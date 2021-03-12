@@ -14,7 +14,7 @@
     name:
       - apt-transport-https
       - ca-certificates
-      - python-pip
+      - python3-pip
       - software-properties-common
     state: latest
 
@@ -22,7 +22,7 @@
   apt_key:
     url: "{{ item }}"
     state: present
-  with_items: 
+  with_items:
     - https://download.docker.com/linux/ubuntu/gpg
 
 - name: add additional docker repo
@@ -38,4 +38,3 @@
   apt:
     name: docker-ce
     state: latest
- 
