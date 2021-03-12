@@ -10,7 +10,7 @@ localhost ansible_connection=local
 ssl_certificate_type  = 'letsencrypt'
 
 # Your email adresse for letsencrypt
-# cert_email = nc@example.org
+cert_email = admin@tks.eu
 
 # receive a certificate from staging
 # uncomment if you want to use letsencrypt staging environment
