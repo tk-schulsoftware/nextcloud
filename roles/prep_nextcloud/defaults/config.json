@@ -34,8 +34,8 @@
         "activity_expire_days": "14",
         "integrity.check.disabled": "false",
         "updater.release.channel": "stable",
-        "share_folder": '/'
-        "sharing.enable_share_accept": false
+        "share_folder": '/',
+        "sharing.enable_share_accept": false,
         "sharing.force_share_accept" false,
         "blacklisted_files": [
             '.htaccess',
